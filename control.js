@@ -132,33 +132,16 @@ function createPlayers() {
 }
 
 
-function pb_updatePoints() {
-		holdingBox = document.getElementById("playerButtonHolder");
-
-		playerButtons = holdingBox.children;
-		for(let i = 0; i < playerButtons.length; i++) {
-			if (playerButtons[i].type == 'button') {
-				console.log(i)
-				console.log(playerButtons[i].type)
-
-				playerButtons[i].value = 'test';
-
-				console.log(playerButtons[i].value)
-			}
-	 }
-}
-
-
 // POINT SYSTEM
 
 function updatePoints(playerNumber, isCorrect) {
 	playerButtons = getPlayerbuttons();
-
-	points = toFloat(playerButtons[playerNumber].innerHTML);
+	console.log(playerButtons)
+	points = parseFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
-		playerButtons[playerNumber].innerHTML = points + 500;
+		playerButtons[playerNumber].innerHTML = points + 1;
 	} else{
-		playerButtons[playerNumber].innerHTML = points - 250;
+		playerButtons[playerNumber].innerHTML = points - 1;
 	}
 }
 
@@ -173,6 +156,8 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
+	
+	return playerButtons;
 }
 
 
@@ -246,4 +231,4 @@ var myChart = new Chart(ctx, {
         }
     }
 });
->>>>>>> Stashed changes
+
