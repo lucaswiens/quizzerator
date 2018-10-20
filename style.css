@@ -80,3 +80,29 @@ html, body { height: 100%; width: 100%; margin: 0; }
 	align-items: center; /* align vertical */
 	border-radius: 15px 30px 50px 5px;
 }
+/* Design der Moderator-Buttons */
+.mod {
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 5px 5px #313131, 0 5px 0 #393939, 0 5px 6px rgba(0, 0, 0, 0.4), 0 2px 9px rgba(255, 255, 255, 0.2) inset, 0 -2px 9px rgba(0, 0, 0, 0.2) inset;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0px 20px;
+    margin-bottom: 40px;
+    padding: 12px 20px;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+#right {
+color: rgb(0, 216, 57);
+}
+#wrong {
+  color: rgb(255, 0, 0);
+}
+#reveal {
+  color: rgb(255, 153, 0);
+}
