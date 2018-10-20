@@ -128,7 +128,6 @@ function createPlayers() {
 		}
 	}
 }
-}
 
 
 function pb_updatePoints() {
@@ -172,7 +171,6 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
-}
 }
 
 
