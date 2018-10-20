@@ -86,6 +86,22 @@ function gameStart() {
 ///////////////////////////////////////////////////////////////////////////////
 
 
+function startQuiz() {
+  questions = JSON.parse(window.localStorage.getItem("questions"));
+  console.log(questions);
+  nextQuestion();
+
+  createPlayers();
+}
+
+
+function nextQuestion() {
+
+  document.getElementById("question").innerHTML=questions[0][0];
+}
+
+
+
 // OPTION HANDLING
 
 // This function creates the player buttons depending on user specified options
@@ -111,6 +127,7 @@ function createPlayers() {
 			holdingBox.appendChild(document.createElement("br"));
 		}
 	}
+}
 }
 
 
@@ -156,6 +173,7 @@ function getPlayerbuttons() {
 		}
 	}
 }
+}
 
 
 // COLOR MANAGEMENT
@@ -187,7 +205,7 @@ function activateMenu(x) {
 		document.getElementById("appmenu").style.height = "0";
 		document.getElementById("appmenubutton").value = 0;
 	} else {
-		document.getElementById("appmenu").style.height = "auto";		
+		document.getElementById("appmenu").style.height = "auto";
 		document.getElementById("appmenubutton").value = 1;
-	}	
+	}
 }
