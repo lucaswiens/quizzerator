@@ -43,12 +43,12 @@ function gameStart() {
       &&  1 <= nquest && nquest <= 100) {
         ngroups = ngrp;
         nquestions = nquest;
-   // window.location.href = "http://www.google.de";
+    window.location.href = "quiz.html";
 
     window.localStorage.setItem("ngroups", JSON.stringify(ngroups));
     window.localStorage.setItem("nquestions", JSON.stringify(nquestions));
 
-    /*var ngroups = JSON.parse(window.localStorage.getItem("ngroups"));*/
+   
   }
   else {
     var error = 'Es sind folgende Fehler aufgetreten: \n';
@@ -82,15 +82,14 @@ function gameStart() {
 
 // This function creates the player buttons depending on user specified options
 
-function pbSubmitOptions() {
+function createPlayers() {
+	var ngroups = JSON.parse(window.localStorage.getItem("ngroups"));
+	const maxNoButtonsRow = 3;
 
-	numberButtons = 4;
-	maxNoButtonsRow = 3;
-
-	noButtonLines = Math.ceil(numberButtons / maxNoButtonsRow);
+	noButtonLines = Math.ceil(ngroups / maxNoButtonsRow);
 
 	holdingBox = document.getElementById("playerButtonHolder");
-	for(let i = 0; i < numberButtons; i++) {	
+	for(let i = 0; i < ngroups; i++) {	
 		var btn = document.createElement("button");
 		btn.setAttribute('type', 'button');
 		btn.setAttribute('class', 'gruppe');// + );
@@ -121,6 +120,7 @@ function pb_updatePoints() {
 
 				console.log(playerButtons[i].value)
 			}
+		}
 }
 
 
