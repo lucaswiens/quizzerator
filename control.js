@@ -81,31 +81,30 @@ function gameStart() {
 // OPTION HANDLING
 
 // This function creates the player buttons depending on user specified options
-function pb_submitOptions() {
 
-		numberButtons = 4;
-		maxNoButtonsRow = 3;
+function pbSubmitOptions() {
 
-		noButtonLines = Math.ceil(numberButtons / maxNoButtonsRow);
+	numberButtons = 4;
+	maxNoButtonsRow = 3;
 
-		holdingBox = document.getElementById("playerButtonHolder");
-		for(let i = 0; i < numberButtons; i++) {
-			var btn = document.createElement("button");
-			btn.setAttribute('type', 'button');
-			btn.setAttribute('class', 'gruppe');// + );
-			btn.setAttribute('id', 'gruppe' + i.toString());
-			btn.setAttribute('onmouseover', 'highlight('+ i.toString()+')')
-			btn.setAttribute('onmouseleave', 'nohighlight('+ i.toString()+')')
-			btn.innerHTML = i.toString()
+	noButtonLines = Math.ceil(numberButtons / maxNoButtonsRow);
 
-			holdingBox.appendChild(btn);
-
-			if ((i+1) % maxNoButtonsRow == 0){
-				holdingBox.appendChild(document.createElement("br"));
-			}
+	holdingBox = document.getElementById("playerButtonHolder");
+	for(let i = 0; i < numberButtons; i++) {	
+		var btn = document.createElement("button");
+		btn.setAttribute('type', 'button');
+		btn.setAttribute('class', 'gruppe');// + );
+		btn.setAttribute('id', 'gruppe' + i.toString());
+		btn.setAttribute('onmouseover', 'highlight('+ i.toString()+')')
+		btn.setAttribute('onmouseleave', 'nohighlight('+ i.toString()+')')
+		btn.innerHTML = i.toString()
+		
+		holdingBox.appendChild(btn);	
+		
+		if ((i+1) % maxNoButtonsRow == 0){
+			holdingBox.appendChild(document.createElement("br"));
 		}
-
-
+	}
 }
 
 
@@ -122,7 +121,35 @@ function pb_updatePoints() {
 
 				console.log(playerButtons[i].value)
 			}
+}
+
+
+// POINT SYSTEM
+
+function updatePoints(playerNumber, isCorrected) {
+	playerButtons = getPlayerbuttons();
+	
+	points = toFloat(playerButtons[playerNumber].innerHTML);
+	if (isCorrected) {
+		playerButtons[playerNumber].innerHTML = points + 500;
+	} else{
+		playerButtons[playerNumber].innerHTML = points - 250;
+	}
+}
+
+
+// GENERAL STUFF
+
+function getPlayerbuttons() {
+	playerButtons = [];
+	buttonHolder = document.getElementById("playerButtonHolder").children;
+	for(let i = 0; i < buttonHolder.length; i++) {
+		if (buttonHolder[i].type == 'button') {
+			playerButtons.push(buttonHolder[i])
 		}
+	}
+	
+	return playerButtons
 }
 
 
