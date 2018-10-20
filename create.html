@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quizzerator</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+   <script src="control.js"></script>
+</head>
+
+<body onload="start()">
+<div class="content">
+
+<div class="createform">
+  <h1>Spiel erstellen</h1>
+<form method="post" enctype="multipart/form-data">
+  <label>
+    Anzahl der Spieler/Teams:
+  </label>
+  <input type="number" name="teams" min="1" max="6">
+  <br>
+  <br>
+  <label>
+    Anzahl der Fragen:
+  </label>
+  <input type="number" name="fragen" min="1" max="100">
+  <br>
+  <br>
+  <label>
+    Fragenkatalog:
+  </label>
+  <input type="file" id="fileUpload" />
+  <br>
+  <br>
+  <input type="button" id="upload" value="Upload" onclick="Upload()" />
+  <br>
+  <br>
+  <input type="submit" value="Spiel starten!">
+  <br>
+  <br>
+</form>
+</div>
+
+
+</div class="content">
+</body>
+
+</html>
