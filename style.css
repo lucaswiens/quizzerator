@@ -84,10 +84,9 @@ header {
 	font-style: oblique;
 	color: #FFF;
 	text-align: center;
-	padding: 0 20px;
+	padding: 25px;
 	margin: auto;
 	margin-top: 2%;
-	display: flex;
 	justify-content: center; /* align horizontal */
 	align-items: center; /* align vertical */
 	border-radius: 15px 30px 50px 5px;
@@ -138,13 +137,14 @@ margin: 10px 10px;
   font-size: 18px;
   font-weight: bold;
   margin: 0px 20px;
-  margin-bottom: 40px;
-  margin:auto;
+  /*margin-bottom: 40px;*/
   padding: 12px 20px;
   position: relative;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
   text-align: center;
+  bottom: 0px;
+  left: 20px;
 
 }
 
