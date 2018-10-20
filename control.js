@@ -126,11 +126,11 @@ function pb_updatePoints() {
 
 // POINT SYSTEM
 
-function updatePoints(playerNumber, isCorrected) {
+function updatePoints(playerNumber, isCorrect) {
 	playerButtons = getPlayerbuttons();
 	
 	points = toFloat(playerButtons[playerNumber].innerHTML);
-	if (isCorrected) {
+	if (isCorrect) {
 		playerButtons[playerNumber].innerHTML = points + 500;
 	} else{
 		playerButtons[playerNumber].innerHTML = points - 250;
