@@ -88,12 +88,6 @@ function gameStart() {
 // OPTION HANDLING
 
 // This function creates the player buttons depending on user specified options
-function pb_submitOptions() {
-
-		numberButtons = 4;
-		maxNoButtonsRow = 3;
-
-<<<<<<< Updated upstream
 function createPlayers() {
 	var ngroups = JSON.parse(window.localStorage.getItem("ngroups"));
 	const maxNoButtonsRow = 3;
@@ -113,9 +107,9 @@ function createPlayers() {
 		holdingBox.appendChild(btn);
 
 		if ((i+1) % maxNoButtonsRow == 0){
-			holdingBox.appendC		}
-
-
+			holdingBox.appendChild(document.createElement("br"));
+		}
+	}
 }
 
 
@@ -159,6 +153,7 @@ function getPlayerbuttons() {
 		if (buttonHolder[i].type == 'button') {
 			playerButtons.push(buttonHolder[i])
 		}
+	}
 }
 
 
