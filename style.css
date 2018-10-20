@@ -5,7 +5,10 @@ body {
 	margin: 0;
 	font-family: "DIN Offc Pro", "Segoe UI", Arial, sans-serif;
 }
-
+a {
+	color: rgb(255,255,255) !important;
+	text-decoration: none !important;
+}
 header {
 	font-size: 4em;
 	text-align: center;
