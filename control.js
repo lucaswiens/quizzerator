@@ -156,7 +156,7 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
-	
+
 	return playerButtons;
 }
 
@@ -231,6 +231,7 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+<<<<<<< HEAD
 
 
 // Key listener
@@ -256,3 +257,5 @@ window.onkeyup = function(e) {
         questionColor(5);
     }
 }
+=======
+>>>>>>> 8f06e6430d573507d0ecaa4230a488f88a5b79e0
