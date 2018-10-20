@@ -232,3 +232,27 @@ var myChart = new Chart(ctx, {
     }
 });
 
+
+// Key listener
+window.onkeyup = function(e) {
+    var key = e.keyCode ? e.keyCode : e.which;
+    // key 1
+    if (key == 49) {
+        questionColor(0);
+	// key 2
+    }else if (key == 50) {
+        questionColor(1);
+	// key 3
+    }else if (key == 51) {
+        questionColor(2);
+	// key 4
+    }else if (key == 52) {
+        questionColor(3);
+	// key 5
+    }else if (key == 53) {
+        questionColor(4);
+	// key 6
+    }else if (key == 54) {
+        questionColor(5);
+    }
+}
