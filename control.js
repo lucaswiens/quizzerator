@@ -156,7 +156,7 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
-	
+
 	return playerButtons;
 }
 
@@ -231,4 +231,3 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-
