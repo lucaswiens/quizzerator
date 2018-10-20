@@ -27,6 +27,8 @@ function Upload() {
                     }
                     reader.readAsText(fileUpload.files[0]);
                     window.localStorage.setItem("questions", JSON.stringify(questions));
+
+                    alert("Upload war erfolgreich.");
                 } else {
                     alert("Dieser Browser unterstützt kein HTML5.");
                 }
@@ -40,7 +42,8 @@ function gameStart() {
   var nquest = parseInt(document.getElementById("nquestions").value);
 
   if (1 <= ngrp && ngrp <= 6
-      &&  1 <= nquest && nquest <= 100) {
+      &&  1 <= nquest && nquest <= 100
+      && questions != []) {
         ngroups = ngrp;
         nquestions = nquest;
     window.location.href = "quiz.html";
@@ -48,30 +51,34 @@ function gameStart() {
     window.localStorage.setItem("ngroups", JSON.stringify(ngroups));
     window.localStorage.setItem("nquestions", JSON.stringify(nquestions));
 
-   
+
   }
   else {
     var error = 'Es sind folgende Fehler aufgetreten: \n';
 
-    if (Number.isInteger(ngrp) == false
-      ||Number.isInteger(nquest) == false ) {
-        alert("Bitte geben Sie eine Spielerzahl und eine Fragenzahl an.");
+    if (Number.isInteger(ngrp) == false ) {
+        error = error + "Es wurde keine Spielerzahl angegeben.\n";
     }
     else {
-
       if (ngrp < 1 || ngrp > 6) {
         error = error + 'Die Spielerzahl muss zwischen 1 und 6 liegen.\n';
       }
-
+    }
+    if (Number.isInteger(nquest) == false ) {
+        error = error + "Es wurde keine Fragenzahl angegeben.\n";
+    }
+    else {
       if (nquest < 1 || nquest > 100) {
         error = error + 'Die Anzahl der Fragen muss zwischen 1 und 100 liegen.\n';
       }
+    }
+    if (questions.length == 0) {
+      error = error + 'Es wurde kein Fragenkatalog hochgeladen.\n'
+    }
+
       alert(error);
    }
  }
-
-
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // CONTROL JS
@@ -81,7 +88,12 @@ function gameStart() {
 // OPTION HANDLING
 
 // This function creates the player buttons depending on user specified options
+function pb_submitOptions() {
 
+		numberButtons = 4;
+		maxNoButtonsRow = 3;
+
+<<<<<<< Updated upstream
 function createPlayers() {
 	var ngroups = JSON.parse(window.localStorage.getItem("ngroups"));
 	const maxNoButtonsRow = 3;
@@ -89,7 +101,7 @@ function createPlayers() {
 	noButtonLines = Math.ceil(ngroups / maxNoButtonsRow);
 
 	holdingBox = document.getElementById("playerButtonHolder");
-	for(let i = 0; i < ngroups; i++) {	
+	for(let i = 0; i < ngroups; i++) {
 		var btn = document.createElement("button");
 		btn.setAttribute('type', 'button');
 		btn.setAttribute('class', 'gruppe');// + );
@@ -97,13 +109,13 @@ function createPlayers() {
 		btn.setAttribute('onmouseover', 'highlight('+ i.toString()+')')
 		btn.setAttribute('onmouseleave', 'nohighlight('+ i.toString()+')')
 		btn.innerHTML = i.toString()
-		
-		holdingBox.appendChild(btn);	
-		
+
+		holdingBox.appendChild(btn);
+
 		if ((i+1) % maxNoButtonsRow == 0){
-			holdingBox.appendChild(document.createElement("br"));
-		}
-	}
+			holdingBox.appendC		}
+
+
 }
 
 
@@ -120,7 +132,7 @@ function pb_updatePoints() {
 
 				console.log(playerButtons[i].value)
 			}
-		}
+	 }
 }
 
 
@@ -128,7 +140,7 @@ function pb_updatePoints() {
 
 function updatePoints(playerNumber, isCorrect) {
 	playerButtons = getPlayerbuttons();
-	
+
 	points = toFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
 		playerButtons[playerNumber].innerHTML = points + 500;
@@ -147,9 +159,6 @@ function getPlayerbuttons() {
 		if (buttonHolder[i].type == 'button') {
 			playerButtons.push(buttonHolder[i])
 		}
-	}
-	
-	return playerButtons
 }
 
 
