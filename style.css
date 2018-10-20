@@ -109,11 +109,9 @@ color: rgb(0, 216, 57);
 }
 
 body {
-	background-color: rgb(0,155,155);
 	padding: 0px;
 	border: 0px;
 	margin: 0px;
-	height: 2000px;
 	font-family: "DIN Offc Pro", "Segoe UI", Arial, sans-serif;
 }
 header {
