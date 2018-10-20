@@ -1,7 +1,6 @@
 .content {
   width:100%;
   height:100%;
-  background-color: rgb(200,200,200);
 }
 
 .createform {
@@ -18,6 +17,7 @@
 
 .createform form input {
   float:  right;
+}
 
 .gruppe {
     background-color: rgba(135, 0, 22,1);
