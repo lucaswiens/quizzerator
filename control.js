@@ -25,11 +25,11 @@ function Upload() {
                                 }
                             }
                         }
+                        window.localStorage.setItem("questions", JSON.stringify(questions));
+
+                        alert("Upload war erfolgreich.");
                     }
                     reader.readAsText(fileUpload.files[0]);
-                    window.localStorage.setItem("questions", JSON.stringify(questions));
-
-                    alert("Upload war erfolgreich.");
                 } else {
                     alert("Dieser Browser unterstützt kein HTML5.");
                 }
@@ -47,6 +47,8 @@ function gameStart() {
       && questions != []) {
         ngroups = ngrp;
         nquestions = nquest;
+
+    console.log(JSON.parse(window.localStorage.getItem("questions")));
     window.location.href = "quiz.html";
 
     window.localStorage.setItem("ngroups", JSON.stringify(ngroups));
