@@ -1,3 +1,4 @@
+
 function start() {
   questions = [];
   ngroups = 0;
@@ -182,4 +183,16 @@ function high(element) {
 
 function nohighlight(group) {
  document.getElementById("gruppe"+group).setAttribute('style', '');
+}
+
+/*App Menu Button*/
+function activateMenu(x) {
+	x.classList.toggle("active");
+	if (document.getElementById("appmenubutton").value == 1) {
+		document.getElementById("appmenu").style.height = "0";
+		document.getElementById("appmenubutton").value = 0;
+	} else {
+		document.getElementById("appmenu").style.height = "auto";		
+		document.getElementById("appmenubutton").value = 1;
+	}	
 }
