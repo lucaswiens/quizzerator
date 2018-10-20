@@ -1,5 +1,7 @@
 function start() {
   questions = [];
+  ngroups = 0;
+  nquestions = 0;
 }
 
 
@@ -24,14 +26,52 @@ function Upload() {
                         }
                     }
                     reader.readAsText(fileUpload.files[0]);
+                    window.localStorage.setItem("questions", JSON.stringify(questions));
                 } else {
                     alert("Dieser Browser unterstützt kein HTML5.");
                 }
             } else {
                 alert("Bitte eine CSV-Datei hochladen.");
             }
-            console.log(questions);
         }
+
+function gameStart() {
+  var ngrp = parseInt(document.getElementById("ngroups").value);
+  var nquest = parseInt(document.getElementById("nquestions").value);
+
+  if (1 <= ngrp && ngrp <= 6
+      &&  1 <= nquest && nquest <= 100) {
+        ngroups = ngrp;
+        nquestions = nquest;
+   // window.location.href = "http://www.google.de";
+
+    window.localStorage.setItem("ngroups", JSON.stringify(ngroups));
+    window.localStorage.setItem("nquestions", JSON.stringify(nquestions));
+
+    /*var ngroups = JSON.parse(window.localStorage.getItem("ngroups"));*/
+  }
+  else {
+    var error = 'Es sind folgende Fehler aufgetreten: \n';
+
+    if (Number.isInteger(ngrp) == false
+      ||Number.isInteger(nquest) == false ) {
+        alert("Bitte geben Sie eine Spielerzahl und eine Fragenzahl an.");
+    }
+    else {
+
+      if (ngrp < 1 || ngrp > 6) {
+        error = error + 'Die Spielerzahl muss zwischen 1 und 6 liegen.\n';
+      }
+
+      if (nquest < 1 || nquest > 100) {
+        error = error + 'Die Anzahl der Fragen muss zwischen 1 und 100 liegen.\n';
+      }
+      alert(error);
+   }
+ }
+
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // CONTROL JS
