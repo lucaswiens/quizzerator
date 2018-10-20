@@ -183,7 +183,7 @@ function nohighlight(group) {
  document.getElementById("gruppe"+group).setAttribute('style', '');
 }
 
-/*App Menu Button*/
+/*App Menu*/
 function activateMenu(x) {
 	x.classList.toggle("active");
 	if (document.getElementById("appmenubutton").value == 1) {
