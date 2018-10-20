@@ -7,13 +7,14 @@
 	<script src="control.js"></script>
 </head>
 
-<body>
+<body onload = createPlayers()>
 	<div class="menubar">The Quizzerator!</div>
 	<div class="questionbox">
 				<div class="questionbox">This is a Test Tskjdlflks!</div>
 				<button type="button" id="weiter">OK IST JA GUT</button>
 	</div>
 
+	<div id="playerButtonHolder"></div>
 
 	<div id="modButtons">
 	  <button type="button" class="mod" id="right" onClick="addPoints(); showAnswer()" > Richtig </button>
