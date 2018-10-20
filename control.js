@@ -203,7 +203,7 @@ function activateMenu(x) {
 		document.getElementById("appmenu").style.height = "0";
 		document.getElementById("appmenubutton").value = 0;
 	} else {
-		document.getElementById("appmenu").style.height = "auto";
+		document.getElementById("appmenu").style.height = "auto";		
 		document.getElementById("appmenubutton").value = 1;
-	}
+	}	
 }

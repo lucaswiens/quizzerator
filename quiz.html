@@ -8,7 +8,20 @@
 </head>
 
 <body onload = "startQuiz()">
-	<div class="menubar">The Quizzerator!</div>
+	<div id="top">
+		<header>Quizerator</header>
+	</div>
+	<div id="appmenubutton" value=0 onclick="activateMenu(this)">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+	</div>
+	<div id="appmenu">
+		<ul>
+			<li><div>Beenden</div></li>
+			<li><div>Neustart</div></li>
+		</ul>
+	</div>
 	<div class="questionbox">
 				<span id="question"></span>
 	</div>
