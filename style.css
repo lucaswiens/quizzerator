@@ -105,20 +105,48 @@ header {
     font-weight: bold;
     margin: 0px 20px;
     margin-bottom: 40px;
+    margin:auto;
     padding: 12px 20px;
     position: relative;
     text-decoration: none;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
+#modButtons {
+  text-align: center;
+  margin: 10px 10px;
+}
+
 #right {
 color: rgb(0, 216, 57);
+margin: 10px 10px;
 }
 #wrong {
-  color: rgb(255, 0, 0);
+color: rgb(255, 0, 0);
+margin: 10px 10px;
 }
 #reveal {
-  color: rgb(255, 153, 0);
+color: rgb(255, 153, 0);
+margin: 10px 10px;
+}
+
+#weiter {
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0 5px 5px #313131, 0 5px 0 #393939, 0 5px 6px rgba(0, 0, 0, 0.4), 0 2px 9px rgba(255, 255, 255, 0.2) inset, 0 -2px 9px rgba(0, 0, 0, 0.2) inset;
+  color: #FFFFFF;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0px 20px;
+  margin-bottom: 40px;
+  margin:auto;
+  padding: 12px 20px;
+  position: relative;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+
 }
 
 /*App Menu*/
