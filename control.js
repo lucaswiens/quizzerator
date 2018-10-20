@@ -90,6 +90,8 @@ function gameStart() {
 
 function startQuiz() {
   questions = JSON.parse(window.localStorage.getItem("questions"));
+  questioncount = 0;
+  displayquest = true;
   console.log(questions);
   nextQuestion();
 
@@ -99,7 +101,22 @@ function startQuiz() {
 
 function nextQuestion() {
 
-  document.getElementById("question").innerHTML=questions[0][0];
+  document.getElementById("question").innerHTML=questions[questioncount][0];
+}
+
+
+
+function reveal() {
+    if (displayquest) {
+      document.getElementById("question").innerHTML=questions[questioncount][1];
+      document.getElementById("reveal").innerHTML="Weiter";
+      questioncount ++;
+      displayquest = false;
+    } else {
+      nextQuestion();
+      document.getElementById("reveal").innerHTML="Auflösung";
+      displayquest = true;
+    }
 }
 
 
@@ -132,16 +149,33 @@ function createPlayers() {
 }
 
 
+function pb_updatePoints() {
+		holdingBox = document.getElementById("playerButtonHolder");
+
+		playerButtons = holdingBox.children;
+		for(let i = 0; i < playerButtons.length; i++) {
+			if (playerButtons[i].type == 'button') {
+				console.log(i)
+				console.log(playerButtons[i].type)
+
+				playerButtons[i].value = 'test';
+
+				console.log(playerButtons[i].value)
+			}
+	 }
+}
+
+
 // POINT SYSTEM
 
 function updatePoints(playerNumber, isCorrect) {
 	playerButtons = getPlayerbuttons();
-	console.log(playerButtons)
-	points = parseFloat(playerButtons[playerNumber].innerHTML);
+
+	points = toFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
-		playerButtons[playerNumber].innerHTML = points + 1;
+		playerButtons[playerNumber].innerHTML = points + 500;
 	} else{
-		playerButtons[playerNumber].innerHTML = points - 1;
+		playerButtons[playerNumber].innerHTML = points - 250;
 	}
 }
 
@@ -156,8 +190,6 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
-
-	return playerButtons;
 }
 
 
@@ -183,7 +215,7 @@ function nohighlight(group) {
  document.getElementById("gruppe"+group).setAttribute('style', '');
 }
 
-/*App Menu*/
+/*App Menu Button*/
 function activateMenu(x) {
 	x.classList.toggle("active");
 	if (document.getElementById("appmenubutton").value == 1) {
@@ -193,66 +225,4 @@ function activateMenu(x) {
 		document.getElementById("appmenu").style.height = "auto";
 		document.getElementById("appmenubutton").value = 1;
 	}
-}
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-
-
-// Key listener
-window.onkeyup = function(e) {
-    var key = e.keyCode ? e.keyCode : e.which;
-    // key 1
-    if (key == 49) {
-        questionColor(0);
-	// key 2
-    }else if (key == 50) {
-        questionColor(1);
-	// key 3
-    }else if (key == 51) {
-        questionColor(2);
-	// key 4
-    }else if (key == 52) {
-        questionColor(3);
-	// key 5
-    }else if (key == 53) {
-        questionColor(4);
-	// key 6
-    }else if (key == 54) {
-        questionColor(5);
-    }
 }

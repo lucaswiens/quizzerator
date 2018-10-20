@@ -8,7 +8,6 @@
 </head>
 
 <body onload = "startQuiz()">
-	<!--App Menu-->
 	<div id="top">
 		<header>Quizzerator</header>
 	</div>
@@ -23,7 +22,6 @@
 			<li><div id="reset" onclick=""><a href="create.html">Neustart</a></div></li>
 		</ul>
 	</div>
-	<!--Quiz-->
 	<div class="questionbox">
 				<span id="question"></span>
 	</div>
@@ -31,9 +29,9 @@
 	<div id="playerButtonHolder"></div>
 
 	<div id="modButtons">
-	  <button type="button" class="mod" id="right" onClick="updatePoints(1, 1); showAnswer()" > Richtig </button>
-	  <button type="button" class="mod" id="wrong" onClick="updatePoints(1, 0); showAnswer()" > Falsch </button>
-	  <button type="button" class="mod" id="reveal" onClick="" > Auflösung </button>
+	  <button type="button" class="mod" id="right" onClick="addPoints(); showAnswer()" > Richtig </button>
+	  <button type="button" class="mod" id="wrong" onClick="" > Falsch </button>
+	  <button type="button" class="mod" id="reveal" onClick="reveal()">Auflösung </button>
 	</div>
 </body>
 
