@@ -110,6 +110,11 @@ header {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
+#playerButtonHolder {
+  text-align: center;
+  margin: 25px 25px;
+}
+
 #modButtons {
   text-align: center;
   margin: 10px 10px;
