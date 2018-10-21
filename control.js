@@ -136,7 +136,7 @@ function createPlayers() {
 
 function updatePoints(playerNumber, isCorrect) {
 	playerButtons = getPlayerbuttons();
-	console.log(playerButtons)
+	//console.log(playerNumber.value)
 	points = parseFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
 		playerButtons[playerNumber].innerHTML = points + 1;
@@ -194,6 +194,7 @@ function activateMenu(x) {
 		document.getElementById("appmenubutton").value = 1;
 	}
 }
+/*
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -231,28 +232,14 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-
+*/
 
 // Key listener
 window.onkeyup = function(e) {
-    var key = e.keyCode ? e.keyCode : e.which;
-    // key 1
-    if (key == 49) {
-        questionColor(0);
-	// key 2
-    }else if (key == 50) {
-        questionColor(1);
-	// key 3
-    }else if (key == 51) {
-        questionColor(2);
-	// key 4
-    }else if (key == 52) {
-        questionColor(3);
-	// key 5
-    }else if (key == 53) {
-        questionColor(4);
-	// key 6
-    }else if (key == 54) {
-        questionColor(5);
+	var key = e.keyCode ? e.keyCode : e.which;
+	refKeyNum = 49;
+	
+	if (key >= 49 && key < 57) {
+		questionColor(key - refKeyNum);
     }
 }
