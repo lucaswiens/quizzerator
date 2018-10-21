@@ -275,3 +275,8 @@ window.onkeyup = function(e) {
 		questionColor(key - refKeyNum);
     }
 }
+
+function questionColor(keyPress) {
+	var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
+	document.getElementsByClassName("questionbox")[0].setAttribute('style', 'border-color:' + hcolor[keyPress]);
+}
