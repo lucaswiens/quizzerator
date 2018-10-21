@@ -173,7 +173,7 @@ margin: 10px 10px;
 	margin: auto;
 	background-color: rgba(0,0,0,0);
 	position: absolute;
-	top: 20px;
+	top: 30px;
 	right: 20px;
 	cursor: pointer;
 	position: fixed;
@@ -207,5 +207,5 @@ margin: 10px 10px;
     background-color: rgba(0,0,0,0.9);
     overflow-x: hidden;
     transition: 0.7s;
-    margin-top: 60px;
+    margin-top: 100px;
 }
