@@ -90,6 +90,8 @@ function gameStart() {
 
 function startQuiz() {
   questions = JSON.parse(window.localStorage.getItem("questions"));
+  questioncount = 0;
+  displayquest = true;
   console.log(questions);
   nextQuestion();
 
@@ -99,7 +101,22 @@ function startQuiz() {
 
 function nextQuestion() {
 
-  document.getElementById("question").innerHTML=questions[0][0];
+  document.getElementById("question").innerHTML=questions[questioncount][0];
+}
+
+
+
+function reveal() {
+    if (displayquest) {
+      document.getElementById("question").innerHTML=questions[questioncount][1];
+      document.getElementById("reveal").innerHTML="Weiter";
+      questioncount ++;
+      displayquest = false;
+    } else {
+      nextQuestion();
+      document.getElementById("reveal").innerHTML="Auflösung";
+      displayquest = true;
+    }
 }
 
 
@@ -132,16 +149,32 @@ function createPlayers() {
 }
 
 
+function pb_updatePoints() {
+		holdingBox = document.getElementById("playerButtonHolder");
+
+		playerButtons = holdingBox.children;
+		for(let i = 0; i < playerButtons.length; i++) {
+			if (playerButtons[i].type == 'button') {
+				console.log(i)
+				console.log(playerButtons[i].type)
+
+				playerButtons[i].value = 'test';
+
+				console.log(playerButtons[i].value)
+			}
+	 }
+}
+
+
 // POINT SYSTEM
 
 function updatePoints(playerNumber, isCorrect) {
 	playerButtons = getPlayerbuttons();
-	//console.log(playerNumber.value)
 	points = parseFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
-		playerButtons[playerNumber].innerHTML = points + 1;
+		playerButtons[playerNumber].innerHTML = points + 500;
 	} else{
-		playerButtons[playerNumber].innerHTML = points - 1;
+		playerButtons[playerNumber].innerHTML = points - 250;
 	}
 }
 
@@ -156,8 +189,6 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
-
-	return playerButtons;
 }
 
 
@@ -183,7 +214,7 @@ function nohighlight(group) {
  document.getElementById("gruppe"+group).setAttribute('style', '');
 }
 
-/*App Menu*/
+/*App Menu Button*/
 function activateMenu(x) {
 	x.classList.toggle("active");
 	if (document.getElementById("appmenubutton").value == 1) {
@@ -194,6 +225,7 @@ function activateMenu(x) {
 		document.getElementById("appmenubutton").value = 1;
 	}
 }
+
 /*
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {

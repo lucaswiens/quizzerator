@@ -5,7 +5,10 @@ body {
 	margin: 0;
 	font-family: "DIN Offc Pro", "Segoe UI", Arial, sans-serif;
 }
-
+a {
+	color: rgb(255,255,255) !important;
+	text-decoration: none !important;
+}
 header {
 	font-size: 4em;
 	text-align: center;
@@ -20,12 +23,13 @@ header {
 .createform {
   width:  500px;
   margin: auto;
+  margin-top: 50px;
   padding: 10px;
-  background-color: white;
+  background-color: whitesmoke;
 
   border-radius:  15px;
   border-style:   solid;
-  border-color:   blue;
+  border-color:   grey;
   border-width:   5px;
 }
 
@@ -49,7 +53,8 @@ header {
     text-decoration: none;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
     min-width: 25%;
-    min-height: 15%;
+    min-height: 25%;
+
 }
 
 #gruppe0 {
@@ -81,10 +86,10 @@ header {
 {
 	height: 50%;
 	width: 90%;
-	background: #250;
+	background: whitesmoke;
 	font-size: 24px;
 	font-style: oblique;
-	color: #FFF;
+  font-weight: bold;
 	text-align: center;
 	padding: 25px;
 	margin: auto;
@@ -92,6 +97,7 @@ header {
 	justify-content: center; /* align horizontal */
 	align-items: center; /* align vertical */
 	border-radius: 15px 30px 50px 5px;
+  border: solid grey 5px;
 }
 
 /* Design der Moderator-Buttons */
@@ -115,6 +121,7 @@ header {
 #playerButtonHolder {
   text-align: center;
   margin: 25px 25px;
+
 }
 
 #modButtons {
@@ -166,7 +173,7 @@ margin: 10px 10px;
 	margin: auto;
 	background-color: rgba(0,0,0,0);
 	position: absolute;
-	top: 30px;
+	top: 20px;
 	right: 20px;
 	cursor: pointer;
 	position: fixed;
@@ -200,5 +207,5 @@ margin: 10px 10px;
     background-color: rgba(0,0,0,0.9);
     overflow-x: hidden;
     transition: 0.7s;
-    margin-top: 100px;
+    margin-top: 60px;
 }
