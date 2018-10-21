@@ -144,6 +144,8 @@ function createPlayers() {
 		btn.setAttribute('id', 'gruppe' + i.toString());
 		btn.setAttribute('onmouseover', 'highlight('+ i.toString()+')')
 		btn.setAttribute('onmouseleave', 'nohighlight('+ i.toString()+')')
+		btn.setAttribute('onClick', 'setActivePlayer(this.value)')
+		btn.setAttribute('value', i)
 		btn.innerHTML = i.toString()
 
 		holdingBox.appendChild(btn);
@@ -154,6 +156,12 @@ function createPlayers() {
 	}
 }
 
+
+function setActivePlayer(playerNumber) {
+	questionColor(playerNumber);
+	document.getElementById("right").value = playerNumber;
+	document.getElementById("wrong").value = playerNumber;
+}
 
 // POINT SYSTEM
 
