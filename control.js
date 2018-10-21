@@ -90,6 +90,7 @@ function gameStart() {
 
 function startQuiz() {
   questions = JSON.parse(window.localStorage.getItem("questions"));
+  nquestions = JSON.parse(window.localStorage.getItem("nquestions"));
   questioncount = 0;
   displayquest = true;
   console.log(questions);
@@ -113,9 +114,14 @@ function reveal() {
       questioncount ++;
       displayquest = false;
     } else {
-      nextQuestion();
-      document.getElementById("reveal").innerHTML="Auflösung";
-      displayquest = true;
+      if (questioncount < questions.length -1 &&   questioncount < nquestions ) {
+        console.log(questioncount + '<' + questions.length)
+        nextQuestion();
+        document.getElementById("reveal").innerHTML="Auflösung";
+        displayquest = true;
+      } else {
+        window.location.href = "result.html";
+      }
     }
 }
 
