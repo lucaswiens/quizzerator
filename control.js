@@ -149,32 +149,15 @@ function createPlayers() {
 }
 
 
-function pb_updatePoints() {
-		holdingBox = document.getElementById("playerButtonHolder");
-
-		playerButtons = holdingBox.children;
-		for(let i = 0; i < playerButtons.length; i++) {
-			if (playerButtons[i].type == 'button') {
-				console.log(i)
-				console.log(playerButtons[i].type)
-
-				playerButtons[i].value = 'test';
-
-				console.log(playerButtons[i].value)
-			}
-	 }
-}
-
-
 // POINT SYSTEM
 
 function updatePoints(playerNumber, isCorrect) {
 	playerButtons = getPlayerbuttons();
 	points = parseFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
-		playerButtons[playerNumber].innerHTML = points + 500;
+		playerButtons[playerNumber].innerHTML = points + 1;
 	} else{
-		playerButtons[playerNumber].innerHTML = points - 250;
+		playerButtons[playerNumber].innerHTML = points - 1;
 	}
 }
 
@@ -189,6 +172,8 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
+	
+	return playerButtons
 }
 
 
@@ -273,5 +258,7 @@ window.onkeyup = function(e) {
 	
 	if (key >= 49 && key < 57) {
 		questionColor(key - refKeyNum);
+		document.getElementById("right").value = key - refKeyNum;
+		document.getElementById("wrong").value = key - refKeyNum;
     }
 }
