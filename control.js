@@ -101,8 +101,8 @@ function startQuiz() {
 
 
 function nextQuestion() {
-
   document.getElementById("question").innerHTML=questions[questioncount][0];
+  
 }
 
 
@@ -119,6 +119,10 @@ function reveal() {
         nextQuestion();
         document.getElementById("reveal").innerHTML="Auflösung";
         displayquest = true;
+		
+		document.getElementById("right").value = -1;
+		document.getElementById("wrong").value = -1;
+		document.getElementsByClassName("questionbox")[0].setAttribute('style', 'border-color: rgb(128, 128, 128)');
       } else {
         window.location.href = "result.html";
       }
@@ -158,9 +162,11 @@ function createPlayers() {
 
 
 function setActivePlayer(playerNumber) {
-	questionColor(playerNumber);
-	document.getElementById("right").value = playerNumber;
-	document.getElementById("wrong").value = playerNumber;
+	if (document.getElementById("right").value < 0) {
+		questionColor(playerNumber);
+		document.getElementById("right").value = playerNumber;
+		document.getElementById("wrong").value = playerNumber;		
+	}
 }
 
 // POINT SYSTEM
@@ -268,12 +274,13 @@ var myChart = new Chart(ctx, {
 // Key listener
 window.onkeyup = function(e) {
 	var key = e.keyCode ? e.keyCode : e.which;
-	refKeyNum = 49;
+	refKeyNum = 97;
 	
-	if (key >= 49 && key < 57) {
-		questionColor(key - refKeyNum);
+	if (key >= 97 && key < 103) {
+		setActivePlayer(key - refKeyNum);
+	/*	questionColor(key - refKeyNum);
 		document.getElementById("right").value = key - refKeyNum;
-		document.getElementById("wrong").value = key - refKeyNum;
+		document.getElementById("wrong").value = key - refKeyNum;*/
     }
 }
 
