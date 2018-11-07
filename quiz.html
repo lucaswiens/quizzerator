@@ -29,8 +29,8 @@
 	<div id="playerButtonHolder"></div>
 
 	<div id="modButtons">
-	  <button type="button" class="mod" id="right" value=0 onClick="updatePoints(this.value, 1); showAnswer()" > Richtig </button>
-	  <button type="button" class="mod" id="wrong" value=0 onClick="updatePoints(this.value, 0); showAnswer()" > Falsch </button>
+	  <button type="button" class="mod" id="right" value=-1 onClick="updatePoints(this.value, 1);" > Richtig </button>
+	  <button type="button" class="mod" id="wrong" value=-1 onClick="updatePoints(this.value, 0);" > Falsch </button>
 	  <button type="button" class="mod" id="reveal" onClick="reveal()" > Auflösung </button>
 	</div>
 </body>
