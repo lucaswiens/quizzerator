@@ -136,7 +136,12 @@ function reveal() {
 // This function creates the player buttons depending on user specified options
 function createPlayers() {
 	var ngroups = JSON.parse(window.localStorage.getItem("ngroups"));
-	const maxNoButtonsRow = 3;
+	var maxNoButtonsRow = 3;
+	if (ngroups == 4) {
+		maxNoButtonsRow = 2;	
+	}
+	
+	
 
 	noButtonLines = Math.ceil(ngroups / maxNoButtonsRow);
 
@@ -150,7 +155,7 @@ function createPlayers() {
 		btn.setAttribute('onmouseleave', 'nohighlight('+ i.toString()+')')
 		btn.setAttribute('onClick', 'setActivePlayer(this.value)')
 		btn.setAttribute('value', i)
-		btn.innerHTML = i.toString()
+		btn.innerHTML = '0'
 
 		holdingBox.appendChild(btn);
 
@@ -201,7 +206,7 @@ function getPlayerbuttons() {
 
 function highlight(group) {
 
-  var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
+  var hcolor = ['rgb(0, 255, 0 )', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(225, 225, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
 
   document.getElementById("gruppe"+group).setAttribute('style', 'background-color:' + hcolor[group]);
 }
@@ -209,7 +214,7 @@ function highlight(group) {
 
 function high(element) {
 
-  var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
+  var hcolor = ['rgb(0, 255, 0 )', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
 
   element.setAttribute('style', 'background-color:' + hcolor[group]);
 }
@@ -285,6 +290,6 @@ window.onkeyup = function(e) {
 }
 
 function questionColor(keyPress) {
-	var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
+	var hcolor = ['rgb(0, 255, 0 )', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(225, 225, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
 	document.getElementsByClassName("questionbox")[0].setAttribute('style', 'border-color:' + hcolor[keyPress]);
 }
