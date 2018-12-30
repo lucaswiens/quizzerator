@@ -103,6 +103,10 @@ function startQuiz() {
 function nextQuestion() {
   document.getElementById("question").innerHTML=questions[questioncount][0];
   
+  //flagHandicap = JSON.parse(window.localStorage.getItem("flagHandicap"));
+ // if (flagHandicap) {
+  pausePlayerButtons();
+  //}
 }
 
 
@@ -173,6 +177,55 @@ function setActivePlayer(playerNumber) {
 		document.getElementById("wrong").value = playerNumber;		
 	}
 }
+
+Array.prototype.min = function() {
+  return Math.min.apply(null, this);
+};
+
+function pausePlayerButtons() {
+	playerButtons = getPlayerbuttons();
+
+	playerPoints = new Array(playerButtons.length).fill(0);
+		
+	for(let i = 0; i < playerButtons.length; i++) {
+		playerPoints[i] = parseFloat(playerButtons[i].innerHTML);
+		console.log(playerPoints[i]);
+	}
+
+	minPoints = playerPoints.min();
+
+	var playerDelay = new Array(playerButtons.length).fill(0);
+	for(let i = 0; i < playerButtons.length; i++) {
+		playerDelay[i] = (playerPoints[i] - minPoints) * 1000;
+	}
+	
+	// deactivePlayer()
+	for(let i = 0; i < playerButtons.length; i++) {
+		deactivatePlayerButton(playerButtons[i]);
+	}
+	
+	// set delays for all buttons
+	for(let i = 0; i < playerButtons.length; i++) {
+		setTimeout(activatePlayerButton, playerDelay[i], playerButtons[i], i);
+	}
+}
+
+
+function activatePlayerButton(domID, number) {
+	domID.setAttribute('onClick', 'setActivePlayer(this.value)')
+	domID.setAttribute('id', 'gruppe' + number.toString());
+	domID.setAttribute('onmouseover', 'highlight('+ number.toString()+')')
+	domID.setAttribute('onmouseleave', 'nohighlight('+ number.toString()+')')
+}
+
+
+function deactivatePlayerButton(domID) {
+	domID.setAttribute('onClick', '');
+	domID.setAttribute('id', 'gruppeOff');
+	domID.setAttribute('onmouseover', '')
+	domID.setAttribute('onmouseleave', '')
+}
+
 
 // POINT SYSTEM
 
