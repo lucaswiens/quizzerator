@@ -81,6 +81,11 @@ header {
   background-color:  rgb(0,60,60)
 }
 
+#gruppeOff {
+  background-color:  rgb(128,128,128)
+}
+
+
 /*Quiz*/
 .questionbox
 {
