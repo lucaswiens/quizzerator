@@ -1,3 +1,4 @@
+var freeBuzzer = true;
 
 function start() {
   questions = [];
@@ -103,20 +104,23 @@ function startQuiz() {
 function nextQuestion() {
 
   document.getElementById("question").innerHTML=questions[questioncount][0];
+
 }
 
-
-
 function reveal() {
+
     if (displayquest) {
       document.getElementById("question").innerHTML=questions[questioncount][1];
       document.getElementById("reveal").innerHTML="Weiter";
+    
       questioncount ++;
       displayquest = false;
     } else {
       if (questioncount < questions.length -1 &&   questioncount < nquestions ) {
         console.log(questioncount + '<' + questions.length)
         nextQuestion();
+
+
         document.getElementById("reveal").innerHTML="Auflösung";
         displayquest = true;
       } else {
@@ -145,6 +149,7 @@ function createPlayers() {
 		btn.setAttribute('onmouseover', 'highlight('+ i.toString()+')')
 		btn.setAttribute('onmouseleave', 'nohighlight('+ i.toString()+')')
 		btn.setAttribute('onClick', 'setActivePlayer(this.value)')
+  //  btn.setAttribute('disabled', 'false');
 		btn.setAttribute('value', i)
 		btn.innerHTML = i.toString()
 
@@ -157,8 +162,13 @@ function createPlayers() {
 }
 
 
+
 function setActivePlayer(playerNumber) {
 	questionColor(playerNumber);
+
+  for(let i = 0; i < 7; i++) {
+  document.getElementById("gruppe"+i.toString()).disabled = true;
+}
 	document.getElementById("right").value = playerNumber;
 	document.getElementById("wrong").value = playerNumber;
 }
@@ -166,7 +176,10 @@ function setActivePlayer(playerNumber) {
 // POINT SYSTEM
 
 function updatePoints(playerNumber, isCorrect) {
+
+
 	playerButtons = getPlayerbuttons();
+
 	points = parseFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
 		playerButtons[playerNumber].innerHTML = points + 1;
@@ -186,7 +199,7 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
-	
+
 	return playerButtons
 }
 
@@ -225,51 +238,11 @@ function activateMenu(x) {
 	}
 }
 
-/*
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-*/
-
 // Key listener
 window.onkeyup = function(e) {
 	var key = e.keyCode ? e.keyCode : e.which;
 	refKeyNum = 49;
-	
+
 	if (key >= 49 && key < 57) {
 		questionColor(key - refKeyNum);
 		document.getElementById("right").value = key - refKeyNum;
@@ -278,6 +251,9 @@ window.onkeyup = function(e) {
 }
 
 function questionColor(keyPress) {
+
+
 	var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
 	document.getElementsByClassName("questionbox")[0].setAttribute('style', 'border-color:' + hcolor[keyPress]);
+
 }
