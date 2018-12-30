@@ -1,4 +1,3 @@
-var freeBuzzer = true;
 
 function start() {
   questions = [];
@@ -102,27 +101,32 @@ function startQuiz() {
 
 
 function nextQuestion() {
-
   document.getElementById("question").innerHTML=questions[questioncount][0];
-
+  
+  //flagHandicap = JSON.parse(window.localStorage.getItem("flagHandicap"));
+ // if (flagHandicap) {
+  pausePlayerButtons();
+  //}
 }
 
-function reveal() {
 
+
+function reveal() {
     if (displayquest) {
       document.getElementById("question").innerHTML=questions[questioncount][1];
       document.getElementById("reveal").innerHTML="Weiter";
-    
       questioncount ++;
       displayquest = false;
     } else {
       if (questioncount < questions.length -1 &&   questioncount < nquestions ) {
         console.log(questioncount + '<' + questions.length)
         nextQuestion();
-
-
         document.getElementById("reveal").innerHTML="Auflösung";
         displayquest = true;
+		
+		document.getElementById("right").value = -1;
+		document.getElementById("wrong").value = -1;
+		document.getElementsByClassName("questionbox")[0].setAttribute('style', 'border-color: rgb(128, 128, 128)');
       } else {
         window.location.href = "result.html";
       }
@@ -136,7 +140,12 @@ function reveal() {
 // This function creates the player buttons depending on user specified options
 function createPlayers() {
 	var ngroups = JSON.parse(window.localStorage.getItem("ngroups"));
-	const maxNoButtonsRow = 3;
+	var maxNoButtonsRow = 3;
+	if (ngroups == 4) {
+		maxNoButtonsRow = 2;	
+	}
+	
+	
 
 	noButtonLines = Math.ceil(ngroups / maxNoButtonsRow);
 
@@ -149,9 +158,8 @@ function createPlayers() {
 		btn.setAttribute('onmouseover', 'highlight('+ i.toString()+')')
 		btn.setAttribute('onmouseleave', 'nohighlight('+ i.toString()+')')
 		btn.setAttribute('onClick', 'setActivePlayer(this.value)')
-  //  btn.setAttribute('disabled', 'false');
 		btn.setAttribute('value', i)
-		btn.innerHTML = i.toString()
+		btn.innerHTML = '0'
 
 		holdingBox.appendChild(btn);
 
@@ -162,24 +170,67 @@ function createPlayers() {
 }
 
 
-
 function setActivePlayer(playerNumber) {
-	questionColor(playerNumber);
+	if (document.getElementById("right").value < 0) {
+		questionColor(playerNumber);
+		document.getElementById("right").value = playerNumber;
+		document.getElementById("wrong").value = playerNumber;		
+	}
+}
 
-  for(let i = 0; i < 7; i++) {
-  document.getElementById("gruppe"+i.toString()).disabled = true;
+Array.prototype.min = function() {
+  return Math.min.apply(null, this);
+};
+
+function pausePlayerButtons() {
+	playerButtons = getPlayerbuttons();
+
+	playerPoints = new Array(playerButtons.length).fill(0);
+		
+	for(let i = 0; i < playerButtons.length; i++) {
+		playerPoints[i] = parseFloat(playerButtons[i].innerHTML);
+		console.log(playerPoints[i]);
+	}
+
+	minPoints = playerPoints.min();
+
+	var playerDelay = new Array(playerButtons.length).fill(0);
+	for(let i = 0; i < playerButtons.length; i++) {
+		playerDelay[i] = (playerPoints[i] - minPoints) * 1000;
+	}
+	
+	// deactivePlayer()
+	for(let i = 0; i < playerButtons.length; i++) {
+		deactivatePlayerButton(playerButtons[i]);
+	}
+	
+	// set delays for all buttons
+	for(let i = 0; i < playerButtons.length; i++) {
+		setTimeout(activatePlayerButton, playerDelay[i], playerButtons[i], i);
+	}
 }
-	document.getElementById("right").value = playerNumber;
-	document.getElementById("wrong").value = playerNumber;
+
+
+function activatePlayerButton(domID, number) {
+	domID.setAttribute('onClick', 'setActivePlayer(this.value)')
+	domID.setAttribute('id', 'gruppe' + number.toString());
+	domID.setAttribute('onmouseover', 'highlight('+ number.toString()+')')
+	domID.setAttribute('onmouseleave', 'nohighlight('+ number.toString()+')')
 }
+
+
+function deactivatePlayerButton(domID) {
+	domID.setAttribute('onClick', '');
+	domID.setAttribute('id', 'gruppeOff');
+	domID.setAttribute('onmouseover', '')
+	domID.setAttribute('onmouseleave', '')
+}
+
 
 // POINT SYSTEM
 
 function updatePoints(playerNumber, isCorrect) {
-
-
 	playerButtons = getPlayerbuttons();
-
 	points = parseFloat(playerButtons[playerNumber].innerHTML);
 	if (isCorrect) {
 		playerButtons[playerNumber].innerHTML = points + 1;
@@ -199,7 +250,7 @@ function getPlayerbuttons() {
 			playerButtons.push(buttonHolder[i])
 		}
 	}
-
+	
 	return playerButtons
 }
 
@@ -208,7 +259,7 @@ function getPlayerbuttons() {
 
 function highlight(group) {
 
-  var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
+  var hcolor = ['rgb(0, 255, 0 )', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(225, 225, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
 
   document.getElementById("gruppe"+group).setAttribute('style', 'background-color:' + hcolor[group]);
 }
@@ -216,7 +267,7 @@ function highlight(group) {
 
 function high(element) {
 
-  var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
+  var hcolor = ['rgb(0, 255, 0 )', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
 
   element.setAttribute('style', 'background-color:' + hcolor[group]);
 }
@@ -238,22 +289,60 @@ function activateMenu(x) {
 	}
 }
 
+/*
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+*/
+
 // Key listener
 window.onkeyup = function(e) {
 	var key = e.keyCode ? e.keyCode : e.which;
-	refKeyNum = 49;
-
-	if (key >= 49 && key < 57) {
-		questionColor(key - refKeyNum);
+	refKeyNum = 97;
+	
+	if (key >= 97 && key < 103) {
+		setActivePlayer(key - refKeyNum);
+	/*	questionColor(key - refKeyNum);
 		document.getElementById("right").value = key - refKeyNum;
-		document.getElementById("wrong").value = key - refKeyNum;
+		document.getElementById("wrong").value = key - refKeyNum;*/
     }
 }
 
 function questionColor(keyPress) {
-
-
-	var hcolor = ['rgb(255, 0, 0)', 'rgb(0, 255, 0 )', 'rgb(0, 0, 255)', 'rgb(125, 125, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
+	var hcolor = ['rgb(0, 255, 0 )', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(225, 225, 0)', 'rgb(125, 0, 125)', 'rgb(0, 125, 125)'];
 	document.getElementsByClassName("questionbox")[0].setAttribute('style', 'border-color:' + hcolor[keyPress]);
-
 }
